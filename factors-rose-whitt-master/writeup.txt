@@ -1,0 +1,88 @@
+COMP 321 Project 1: Factors
+<Insert your name and NetID.>
+
+---(Do not write lines of text that exceed the width of this line.)------------
+
+DESIGN DESCRIPTION
+
+<Insert a description of your solution in English.  Describe any design
+decisions that you made, such as the algorithms that you used.  Do not submit
+pseudo-code.> 
+
+Recursive:
+For my recursive method, I initially thought I could implement it 
+like my iterative one (a 2, 3, etc.), which actually worked for a while
+but I ultimately found to be incorrect when I inputted 49.
+After some brain storming, I realized that I would need to do basically
+everything in a recursive helper.
+My first recursive case determines if the current number is divisible
+by the given factor. If it is, you recurse over the quotient of
+your number divided by the factor and up your counter to show that you 
+have found another prime factor.
+The second recursive case deals with when you cannot evenly divide
+the number by the current factor. In this case, you up the factor by 1
+and recurse.
+Finally, the base case catches teh last prime factor that was returned
+from the final recursive case. It ups the counter and finally returns
+the calculated number of prime factors.
+
+
+Count Factors:
+I knew that I should start with the lowest prime number and attempt to 
+divide the number by it as long as I could, incrementing a counter each time.
+I then needed to check every integer from 3 to the square root of
+the number (because thats the highest factor possible), and divide by each
+integer until no longer possible, again incrementing the counter.
+Finally, if n was not 2, the lowest prime number, by the end, you know that
+you have landed on your last prime number so you increment count again and
+return the count.
+
+Count Distinct:
+The basic logic for this was the same as non-distinct. However, I knew
+I needed to have something to store prime factors each time they were
+discovered for the first time. When a prime factor was found, I 
+needed to check to see if it was already in this array before incrementing.
+If it wasn't, I added it to the array and incremented the count. When
+making the array in the beginning, I simply created an array of size
+square root of the given number (see above for why) and initialized
+each element to be zero.
+
+TESTING STRATEGY
+
+<Insert a detailed description of your testing strategy: at a minimum
+you should explain how you tested your code, how you selected your inputs,
+what those inputs were, and why you believe those inputs were sufficient
+to test your code.>
+
+TESTS:
+1) Invalid inputs
+	Ex: n = 1
+2) The smallest prime
+	Ex: n = 2
+3) This integer's prime factorization is the same as the non-prime
+	 factorization.
+	Ex: 6
+4) One Distinct, Repeating Factor
+	Ex: 32
+5) A number that has prime factors, none of which are 2 or 3
+	Ex: 3451
+6) Huge non-prime
+	Ex: 4294967295
+7) Huge prime
+	Ex: 4294967291
+8) The square of a prime factor
+	Ex: 49
+9) Prime factor to the third
+	Ex: 323
+I ensure that I am actually finding the PRIME factorization, not just
+the normal factorization. I verified that my absolute base case, 2,
+worked before anything else. I wanted to make sure that I counted all 
+the way through when given a number with lots of factors, all of which
+the same. Further, this was great for testing distinct. Non-distinct
+would be 5 while distinct would be 1. In one of my initial recursive
+methods, it only worked when 2 and/or 3 were the factors. I realized
+the issue through testing. I had to make sure my iterative method was
+complete and efficient so it would be able to run the largest
+possible integers, prime or not prime. I needed to also ensure that
+my solutions worked for integers with only distinct prime
+factorizations, only non-distinct, and a mix of the two.
